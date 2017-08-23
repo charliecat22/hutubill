@@ -5,6 +5,7 @@ import java.util.List;
 import dao.RecordDAO;
 import entity.Record;
 import gui.page.SpendPage;
+import util.DBUtil;
 import util.DateUtil;
  
 public class SpendService {
@@ -16,7 +17,7 @@ public class SpendService {
         // 今日数据
         List<Record> toDayRecords = dao.listToday();
         // 本月总天数
-        int thisMonthTotalDay = DateUtil.thisMonthTotalDay();
+       int thisMonthTotalDay = DateUtil.thisMonthTotalDay();
  
         int monthSpend = 0;
         int todaySpend = 0;
@@ -30,16 +31,18 @@ public class SpendService {
         int monthBudget = new ConfigService().getIntBudget();
  
         // 统计本月消费
-        for (Record record : thisMonthRecords) {
-            monthSpend += record.getSpend();
+        for(Record record : thisMonthRecords){
+        	monthSpend += record.getSpend();
         }
  
         // 统计今日消费
-        for (Record record : toDayRecords) {
-            todaySpend += record.getSpend();
+        for(Record record : toDayRecords){
+        	todaySpend += record.getSpend();
         }
+        
         // 计算日均消费
         avgSpendPerDay = monthSpend / thisMonthTotalDay;
+        
         // 计算本月剩余
         monthAvailable = monthBudget - monthSpend;
  
@@ -50,7 +53,7 @@ public class SpendService {
         dayAvgAvailable = monthAvailable / monthLeftDay;
  
         // 计算使用比例
-        usagePercentage = monthSpend * 100 / monthBudget;
+       usagePercentage = monthSpend*100 / monthBudget;
  
         // 根据这些信息，生成SpendPage对象
  
