@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
- 
+
+import com.birosoft.liquid.LiquidSplitPaneUI;
+
 import dao.RecordDAO;
+import entity.Category;
 import entity.Record;
 import util.DateUtil;
  
@@ -17,14 +20,15 @@ public class ReportService {
      * @param monthRawData
      * @return
      */
-    public int getDaySpend(Date d,List<Record> monthRawData){
-        int daySpend = 0;
-        for (Record record : monthRawData) {
-            if(record.date.equals(d))
-                daySpend+=record.spend;
-        }
-        return daySpend;
-    }
+	public int getDaySpend(Date d,List<Record> monthRawData){
+	   int daySpend = 0;
+	   for(Record record : monthRawData){
+		   if(record.date.equals(d)){
+			   daySpend += record.spend;
+			}
+	   }
+	   return daySpend;
+   }
          
     /**
      * 获取一个月的消费记录集合
