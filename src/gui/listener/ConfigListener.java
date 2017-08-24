@@ -19,6 +19,7 @@ public class ConfigListener implements ActionListener{
       if (!GUIUtil.checkEmpty(p.tfBudget, "±æ‘¬‘§À„")) {
 		return;
      	}
+      
       String mysqlPath = p.tfMysqlPath.getText();
       if(0!=mysqlPath.length()){
     	  File commandFile = new File(mysqlPath,"bin/mysql.exe");
@@ -28,6 +29,7 @@ public class ConfigListener implements ActionListener{
     		  return;
     	  }
       }
+      
       ConfigService cs = new ConfigService();
       cs.update(ConfigService.budget, p.tfBudget.getText());
       cs.update(ConfigService.mysqlPath, mysqlPath);
